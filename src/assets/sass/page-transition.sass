@@ -1,0 +1,27 @@
+$timeout: 0.5s
+
+// page push
+//.page-push-enter
+//  opacity: 1
+//.page-push-enter.page-push-enter-active
+//  transition: all $timeout
+//  opacity: 0
+.page-push-leave
+  opacity: 1
+.page-push-leave.page-push-leave-active
+  transition: all $timeout
+  opacity: 0
+
+// page pop
+.page-pop-enter
+  opacity: 0
+  z-index: 999
+.page-pop-enter.page-pop-enter-active
+  transition: all $timeout
+  opacity: 1
+//.page-pop-leave
+//  opacity: 0
+//.page-pop-leave.page-pop-leave-active
+//  transform:  all $timeout
+//  opacity: 1
+

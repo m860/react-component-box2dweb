@@ -1,0 +1,37 @@
+.panel
+  display: flex
+  flex-direction: column
+  border: solid 1px #ee6e73
+  border-radius: 6px
+  overflow: hidden
+  .panel-header
+    display: flex
+    height: 44px
+    flex-direction: row
+    background-color: #ee6e73
+    align-items: center
+    color: white
+    .panel-header-title
+      min-width: 100px
+      padding-left: 10px
+    .panel-header-right
+      flex: 1
+      justify-content: flex-end
+      text-align: right
+      flex-direction: row
+    .panel-header-collapsible-right
+      justify-content: flex-end
+      align-items: center
+      flex: 1
+      flex-direction: row
+      color: white
+      display: flex
+    .panel-header-collapsible
+      display: flex
+      width: 21px
+      justify-content: center
+      align-items: center
+      a
+        color: white
+  .panel-content
+    //min-height: 80px

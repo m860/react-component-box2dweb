@@ -1,0 +1,22 @@
+.pagination
+  display: flex
+  flex-direction: row
+  margin: 0
+  padding: 0
+  user-select: none
+  li
+    padding: 8px 12px
+    border-radius: 4px
+    a
+      color: black
+      outline: none
+  li.disabled
+    color: gray
+    cursor: not-allowed
+    a
+      pointer-events: none
+      color: gray
+  li.cur
+    background-color: #ee6e73
+    a
+      color: white
