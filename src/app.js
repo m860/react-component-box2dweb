@@ -1,6 +1,5 @@
 import React, {PropTypes, PureComponent} from 'react'
 import ReactDOM from 'react-dom'
-import TestComponent from './components/TestComponent'
 import {Router, Route, hashHistory, IndexRoute, Link} from "react-router";
 
 const routes = [{
@@ -46,7 +45,7 @@ class Index extends PureComponent {
 			<ol>
 				{paths.map((p,index)=>{
 					return (
-						<li>
+						<li key={index}>
 							<Link to={p.url}>{p.name}</Link>
 						</li>
 					);

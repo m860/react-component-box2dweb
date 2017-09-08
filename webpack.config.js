@@ -30,7 +30,7 @@ var plugins = [
 		,filename:"vendor.bundle.js"
 	})
 	,new webpack.ProvidePlugin({
-		Box2D:path.join(__dirname,'libs/Box2dWeb-2.1.a.3.js')
+		Box2D:"box2dweb"
 	})
 	//clean dist
 	, new CleanWebpackPlugin(['dist'], {

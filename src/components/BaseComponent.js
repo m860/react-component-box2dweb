@@ -1,7 +1,7 @@
-import React,{Component,PureComponent} from 'react';
+import React,{PureComponent} from 'react';
 import update from 'immutability-helper'
 
-export default class Base extends PureComponent{
+export default class BaseComponent extends PureComponent{
 	constructor(props){
 		super(props);
 		this._mounted=false;
