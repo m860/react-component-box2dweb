@@ -29,6 +29,9 @@ var plugins = [
 		name:"vendor"
 		,filename:"vendor.bundle.js"
 	})
+	,new webpack.ProvidePlugin({
+		Box2D:path.join(__dirname,'libs/Box2dWeb-2.1.a.3.js')
+	})
 	//clean dist
 	, new CleanWebpackPlugin(['dist'], {
 		root: __dirname,
@@ -115,6 +118,7 @@ module.exports = {
 	, resolve: {
 		//设置别名
 		alias: {
+
 		}
 	}
 	, plugins: plugins
