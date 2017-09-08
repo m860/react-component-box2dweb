@@ -3,6 +3,12 @@ import BaseDef from './BaseDef'
 import PropTypes from 'prop-types'
 import FixtureDef from './FixtureDef'
 
+export const BodyType={
+	dynamicBody:Box2D.Dynamics.b2Body.b2_dynamicBody,
+	staticBody:Box2D.Dynamics.b2Body.b2_staticBody,
+	kinematicBody:Box2D.Dynamics.b2Body.b2_kinematicBody,
+};
+
 export default class BodyDef extends BaseDef {
 	static propTypes = {
 		type: PropTypes.number,

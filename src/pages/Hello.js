@@ -1,7 +1,7 @@
 import React from 'react'
 import BasePage from './BasePage'
 import World from '../components/World'
-import BodyDef from '../components/BodyDef'
+import BodyDef,{BodyType} from '../components/BodyDef'
 import FixtureDef from '../components/FixtureDef'
 
 export default class Hello extends BasePage{
@@ -14,7 +14,7 @@ export default class Hello extends BasePage{
 		return (
 			<div>
 				<World>
-					<BodyDef position={{x:100,y:100}} type={Box2D.Dynamics.b2Body.b2_staticBody}>
+					<BodyDef position={{x:100,y:100}} type={BodyType.staticBody}>
 						<FixtureDef shape={this.shape}/>
 					</BodyDef>
 				</World>
