@@ -3,6 +3,7 @@ import BasePage from './BasePage'
 import World from '../components/World'
 import BodyDef,{BodyType} from '../components/BodyDef'
 import FixtureDef from '../components/FixtureDef'
+import Rect from '../components/shapes/Rect'
 
 export default class Hello extends BasePage{
 	constructor(props){
@@ -15,7 +16,9 @@ export default class Hello extends BasePage{
 			<div>
 				<World>
 					<BodyDef position={{x:100,y:100}} type={BodyType.staticBody}>
-						<FixtureDef shape={this.shape}/>
+						<FixtureDef>
+							<Rect ww={25} hh={25}/>
+						</FixtureDef>
 					</BodyDef>
 				</World>
 			</div>

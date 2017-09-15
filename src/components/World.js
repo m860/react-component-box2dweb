@@ -81,9 +81,12 @@ export default class World extends BaseComponent {
 
 	render() {
 		return (
-			<div style={{width:this.props.width,height:this.props.height}}>
-				<canvas width={this.props.width} height={this.props.height}
-						ref={component=>this._canvas=component}>
+			<div
+				style={{width:this.props.width,height:this.props.height}}>
+				<canvas
+					width={this.props.width}
+					height={this.props.height}
+					ref={component=>this._canvas=component}>
 					{React.Children.map(this.props.children, (child, index)=> {
 						return React.cloneElement(child, {
 							key: `body-def-${index}`,

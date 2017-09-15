@@ -7,8 +7,9 @@ export default class FixtureDef extends BaseDef {
 		density: PropTypes.number,
 		friction: PropTypes.number,
 		restitution: PropTypes.number,
-		shape: PropTypes.object.isRequired,
-		userData: PropTypes.any
+		//shape: PropTypes.object.isRequired,
+		userData: PropTypes.any,
+		children:PropTypes.node.isRequired
 	};
 	static defaultProps = {
 		density: 1.0,
@@ -23,7 +24,7 @@ export default class FixtureDef extends BaseDef {
 		this.fixtureDef.density = this.props.density;
 		this.fixtureDef.restitution = this.props.restitution;
 		this.fixtureDef.friction = this.props.friction;
-		this.fixtureDef.shape = this.props.shape;
+		//this.fixtureDef.shape = this.props.shape;
 		this.fixture = null;
 	}
 
@@ -32,6 +33,13 @@ export default class FixtureDef extends BaseDef {
 	}
 
 	render() {
-		return null;
+		return React.cloneElement(this.props.children,{
+			ref:'shape'
+		});
+	}
+
+	componentDidMount(){
+		super.componentDidMount();
+		this.fixtureDef.shape=this.refs['shape'].shape;
 	}
 }

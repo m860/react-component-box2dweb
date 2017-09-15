@@ -7,6 +7,7 @@ export default class BaseComponent extends PureComponent{
 		this._mounted=false;
 	}
 	componentDidMount(){
+		console.log(this.constructor.name)
 		this._mounted=true;
 	}
 	componentWillUnmount(){
