@@ -21,7 +21,9 @@ export default class World extends BaseComponent {
 		step: PropTypes.number,
 		velocityIterations: PropTypes.number,
 		positionIterations: PropTypes.number,
-		scale: PropTypes.number
+		scale: PropTypes.number,
+		style: PropTypes.object,
+		className: PropTypes.string
 	};
 	static defaultProps = {
 		width: 400,
@@ -36,7 +38,8 @@ export default class World extends BaseComponent {
 		step: 1 / 60,
 		velocityIterations: 10,
 		positionIterations: 8,
-		scale: 30
+		scale: 30,
+		style: {}
 	};
 
 	constructor(props) {
@@ -82,7 +85,8 @@ export default class World extends BaseComponent {
 	render() {
 		return (
 			<div
-				style={{width:this.props.width,height:this.props.height}}>
+				className={this.props.className}
+				style={{width:this.props.width,height:this.props.height,...this.props.style}}>
 				<canvas
 					width={this.props.width}
 					height={this.props.height}
