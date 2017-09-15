@@ -4,6 +4,7 @@ import World from '../components/World'
 import BodyDef, {BodyType} from '../components/BodyDef'
 import FixtureDef from '../components/FixtureDef'
 import Rect from '../components/shapes/Rect'
+import Circle from '../components/shapes/Circle'
 
 export default class Hello extends BasePage {
 	constructor(props) {
@@ -29,6 +30,13 @@ export default class Hello extends BasePage {
 						position={{x:200,y:10}}>
 						<FixtureDef>
 							<Rect width={50} height={50}/>
+						</FixtureDef>
+					</BodyDef>
+					<BodyDef
+						type={BodyType.dynamicBody}
+						position={{x:250,y:10}}>
+						<FixtureDef>
+							<Circle radius={10}/>
 						</FixtureDef>
 					</BodyDef>
 				</World>

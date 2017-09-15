@@ -59,9 +59,18 @@ export default class World extends BaseComponent {
 			let body = this._world.CreateBody(bodyDef);
 			bodyDefInstance.fixtureDefs.forEach(fixtureDefInstance=> {
 				let {fixtureDef}=fixtureDefInstance;
-				fixtureDef.shape.m_vertices.forEach(v=> {
-					v.Multiply(1 / this.props.scale);
-				});
+				if (fixtureDef.shape.m_vertices) {
+					fixtureDef.shape.m_vertices.forEach(v=> {
+						v.Multiply(1 / this.props.scale);
+					});
+				}
+				else if (fixtureDef.shape.m_radius) {
+					fixtureDef.shape.SetRadius(fixtureDef.shape.m_radius / this.props.scale);
+				}
+				else {
+					console.warn(`Not implementation`, fixtureDef.shape);
+				}
+
 				console.log(fixtureDef);
 				let fixture = body.CreateFixture(fixtureDef);
 				fixtureDefInstance.setFixture(fixture);
