@@ -2,7 +2,7 @@ import React from 'react'
 import Shape from './Shape'
 import PropTypes from 'prop-types'
 
-export default class Rect extends Shape {
+export default class Circle extends Shape {
 	static propTypes = {
 		radius: PropTypes.number.isRequired
 	};
