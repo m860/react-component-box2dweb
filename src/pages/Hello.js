@@ -8,12 +8,6 @@ import Circle from '../components/shapes/Circle'
 import Polygon from '../components/shapes/Polygon'
 
 export default class Hello extends BasePage {
-	constructor(props) {
-		super(props);
-		this.shape = new Box2D.Collision.Shapes.b2PolygonShape();
-		this.shape.SetAsBox(25, 25)
-	}
-
 	render() {
 		return (
 			<div>
