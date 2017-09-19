@@ -24,7 +24,19 @@ class Camera {
 
 export default class World extends BaseComponent {
 	/**
-	 * @property {Array} gravity [[0,10]] - 重力向量,数组表示一个坐标点
+	 * @property {?Number} width [400]
+	 * @property {?Number} height [300]
+	 * @property {?Boolean} allowSleep [true]
+	 * @property {?Object} gravity [{x:0,y:10}]
+	 * @property {?Boolean} debugDraw [true]
+	 * @property {?Boolean} running [true]
+	 * @property {?Number} step [1/60]
+	 * @property {?Number} velocityIterations [10]
+	 * @property {?Number} positionIterations [8]
+	 * @property {?Number} scale [30]
+	 * @property {?Object} style
+	 * @property {?String} className
+	 * @property {?Function} onStep [()=>null]
 	 * */
 	static propTypes = {
 		width: PropTypes.number,
@@ -123,6 +135,9 @@ export default class World extends BaseComponent {
 		}
 	}
 
+	/**
+	 * get main camera instance
+	 * */
 	getMainCamera(): ?Camera {
 		if (this._ctx && !this._camera) {
 			this._camera = new Camera(this._ctx);
