@@ -4,6 +4,24 @@ import PropTypes from 'prop-types'
 
 const debugDrawDefaultAlpha = 0.5;
 
+class Camera {
+	constructor(context) {
+		this._ctx = context;
+		this.x = 0;
+		this.y = 0;
+	}
+
+	move(x = 0, y = 0) {
+		this.x += x;
+		this.y += y;
+		this._ctx.translate(x, y);
+	}
+
+	clear() {
+		this._ctx.clearRect(this.x * -1, this.y * -1, this._ctx.canvas.width, this._ctx.canvas.height);
+	}
+}
+
 export default class World extends BaseComponent {
 	/**
 	 * @property {Array} gravity [[0,10]] - 重力向量,数组表示一个坐标点
@@ -23,7 +41,8 @@ export default class World extends BaseComponent {
 		positionIterations: PropTypes.number,
 		scale: PropTypes.number,
 		style: PropTypes.object,
-		className: PropTypes.string
+		className: PropTypes.string,
+		onStep: PropTypes.func
 	};
 	static defaultProps = {
 		width: 400,
@@ -39,7 +58,8 @@ export default class World extends BaseComponent {
 		velocityIterations: 10,
 		positionIterations: 8,
 		scale: 30,
-		style: {}
+		style: {},
+		onStep: ()=>null
 	};
 
 	constructor(props) {
@@ -50,6 +70,8 @@ export default class World extends BaseComponent {
 		this._world = new Box2D.Dynamics.b2World(this._gravity, this.props.allowSleep);
 		this._bodyDefs = [];
 		this._timer = null;
+		this._stepBeginTime = null;
+		this._camera = null;
 	}
 
 	_createBodies() {
@@ -80,6 +102,16 @@ export default class World extends BaseComponent {
 	}
 
 	_renderWorld() {
+		if (this._camera) {
+			this._camera.clear()
+		}
+		if (!this._stepBeginTime) {
+			this._stepBeginTime = Date.now();
+		}
+		const now = Date.now();
+		const duration = now - this._stepBeginTime;
+		this._stepBeginTime = now;
+		this.props.onStep(duration);
 		this._world.Step(this.props.step, this.props.velocityIterations, this.props.positionIterations);
 		this._world.DrawDebugData();
 		this._timer = window.requestAnimationFrame(this._renderWorld.bind(this));
@@ -89,6 +121,13 @@ export default class World extends BaseComponent {
 		if (this._timer) {
 			window.cancelAnimationFrame(this._timer);
 		}
+	}
+
+	getMainCamera(): ?Camera {
+		if (this._ctx && !this._camera) {
+			this._camera = new Camera(this._ctx);
+		}
+		return this._camera;
 	}
 
 	render() {

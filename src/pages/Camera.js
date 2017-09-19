@@ -1,10 +1,3 @@
-# react-box2dweb
-
-<img src="https://raw.githubusercontent.com/m860/react-component-box2dweb/master/src/screenshots/react-box2dweb.gif"/>
-
-## Basic Usage
-
-```javascript
 import React from 'react'
 import BasePage from './BasePage'
 import World from '../components/World'
@@ -15,10 +8,26 @@ import Circle from '../components/shapes/Circle'
 import Polygon from '../components/shapes/Polygon'
 
 export default class Hello extends BasePage {
+	constructor(props) {
+		super(props);
+		this.world = null;
+		this.camera = null;
+	}
+
 	render() {
 		return (
 			<div>
 				<World
+					onStep={(duration)=>{
+						if(this.camera){
+							this.camera.move(duration*-0.01);
+						}
+					}}
+					ref={ref=>{
+						this.world=ref;
+						this.camera=ref.getMainCamera();
+						//console.log(this.camera)
+					}}
 					style={{backgroundColor:"silver"}}>
 					<BodyDef
 						position={{x:200,y:275}}
@@ -57,19 +66,3 @@ export default class Hello extends BasePage {
 		);
 	}
 }
-```
-
-## TODO
-
-- [x] World
-- [x] BodyDef
-- [x] FixtureDef
-- shapes
-    - [x] Rect
-    - [x] Circle
-    - [x] Polygon
-- [x] camera
-- [ ] contact listener
-- [ ] contact filter
-- [ ] keyboard
-- [ ] WeldJoint

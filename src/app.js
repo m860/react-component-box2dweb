@@ -3,9 +3,13 @@ import ReactDOM from 'react-dom'
 import {Router, Route, hashHistory, IndexRoute, Link} from "react-router";
 
 const routes = [{
-	path:'hello',
-	component:require('./pages/Hello.js').default,
-	name:'hello'
+	path: 'hello',
+	component: require('./pages/Hello.js').default,
+	name: 'hello'
+}, {
+	path: "camera",
+	component: require('./pages/Camera').default,
+	name: 'camera'
 }];
 
 function getDefinedPaths() {
@@ -18,8 +22,8 @@ function getDefinedPaths() {
 		}
 		if (route.indexRoute) {
 			paths.push({
-				name:route.indexRoute.name,
-				url:path
+				name: route.indexRoute.name,
+				url: path
 			});
 		}
 		if (route.childRoutes) {
@@ -27,8 +31,8 @@ function getDefinedPaths() {
 		}
 		if (route.name) {
 			paths.push({
-				name:route.name,
-				url:path
+				name: route.name,
+				url: path
 			});
 		}
 	}
@@ -37,13 +41,13 @@ function getDefinedPaths() {
 	return paths;
 }
 
-const paths=getDefinedPaths();
+const paths = getDefinedPaths();
 
 class Index extends PureComponent {
 	render() {
 		return (
 			<ol>
-				{paths.map((p,index)=>{
+				{paths.map((p, index)=> {
 					return (
 						<li key={index}>
 							<Link to={p.url}>{p.name}</Link>
