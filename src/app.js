@@ -10,6 +10,10 @@ const routes = [{
 	path: "camera",
 	component: require('./pages/Camera').default,
 	name: 'camera'
+}, {
+	path: "contactfilter",
+	component: require('./pages/ContactFilter').default,
+	name: 'contact filter'
 }];
 
 function getDefinedPaths() {

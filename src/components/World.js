@@ -54,7 +54,17 @@ export default class World extends BaseComponent {
 		scale: PropTypes.number,
 		style: PropTypes.object,
 		className: PropTypes.string,
-		onStep: PropTypes.func
+		onStep: PropTypes.func,
+		contactListener: PropTypes.shape({
+			BeginContact: PropTypes.func,
+			EndContact: PropTypes.func,
+			PostSolve: PropTypes.func,
+			PreSolve: PropTypes.func,
+		}),
+		contactFilter: PropTypes.shape({
+			RayCollide: PropTypes.func,
+			ShouldCollide: PropTypes.func,
+		})
 	};
 	static defaultProps = {
 		width: 400,
@@ -80,10 +90,32 @@ export default class World extends BaseComponent {
 		this._ctx = null;
 		this._gravity = new Box2D.Common.Math.b2Vec2(this.props.gravity.x, this.props.gravity.y);
 		this._world = new Box2D.Dynamics.b2World(this._gravity, this.props.allowSleep);
+		this._setContactListener(props.contactListener);
+		this._setContactFilter(props.contactFilter);
 		this._bodyDefs = [];
 		this._timer = null;
 		this._stepBeginTime = null;
 		this._camera = null;
+	}
+
+	_setContactFilter(contactFilterConf) {
+		if (contactFilterConf) {
+			const contactFilter = Object.assign(
+				new Box2D.Dynamics.b2ContactFilter(),
+				contactFilterConf
+			);
+			this._world.SetContactFilter(contactFilter);
+		}
+	}
+
+	_setContactListener(contactListenerConf) {
+		if (contactListenerConf) {
+			const contactListener = Object.assign(
+				new Box2D.Dynamics.b2ContactListener(),
+				contactListenerConf
+			);
+			this._world.SetContactListener(contactListener)
+		}
 	}
 
 	_createBodies() {
@@ -105,7 +137,6 @@ export default class World extends BaseComponent {
 					console.warn(`Not implementation`, fixtureDef.shape);
 				}
 
-				console.log(fixtureDef);
 				let fixture = body.CreateFixture(fixtureDef);
 				fixtureDefInstance.setFixture(fixture);
 			});
