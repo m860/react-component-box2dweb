@@ -96,6 +96,15 @@ export default class World extends BaseComponent {
 		this._timer = null;
 		this._stepBeginTime = null;
 		this._camera = null;
+		this._keyboardStatus = Array.apply(null, {length: 255}).map(()=>false);
+		this._onkeydown = (event)=> {
+			this._keyboardStatus[event.keyCode] = true;
+		}
+		this._onkeyup = (event)=> {
+			this._keyboardStatus[event.keyCode] = false;
+		}
+		window.addEventListener('keydown', this._onkeydown, false);
+		window.addEventListener('keyup', this._onkeyup, false);
 	}
 
 	_setContactFilter(contactFilterConf) {
@@ -154,7 +163,7 @@ export default class World extends BaseComponent {
 		const now = Date.now();
 		const duration = now - this._stepBeginTime;
 		this._stepBeginTime = now;
-		this.props.onStep(duration);
+		this.props.onStep(duration, this._keyboardStatus);
 		this._world.Step(this.props.step, this.props.velocityIterations, this.props.positionIterations);
 		this._world.DrawDebugData();
 		this._timer = window.requestAnimationFrame(this._renderWorld.bind(this));
@@ -230,6 +239,16 @@ export default class World extends BaseComponent {
 	componentWillUnmount() {
 		super.componentWillUnmount();
 		this._stop();
+		window.removeEventListener('keydown', this._onkeydown, false);
+		window.removeEventListener('keyup', this._onkeyup, false);
 	}
 
 }
+export const KeyCode = {
+	w: 87,
+	s: 83,
+	a: 65,
+	d: 68,
+	j: 74,
+	k: 75
+};
