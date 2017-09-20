@@ -227,4 +227,9 @@ export default class World extends BaseComponent {
 		}
 	}
 
+	componentWillUnmount() {
+		super.componentWillUnmount();
+		this._stop();
+	}
+
 }

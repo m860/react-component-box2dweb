@@ -24,8 +24,10 @@ export default class Hello extends BasePage {
 						}
 					}}
 					ref={ref=>{
-						this.world=ref;
-						this.camera=ref.getMainCamera();
+						if(ref){
+							this.world=ref;
+							this.camera=ref.getMainCamera();
+						}
 						//console.log(this.camera)
 					}}
 					style={{backgroundColor:"silver"}}>
